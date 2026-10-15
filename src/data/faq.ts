@@ -8,8 +8,8 @@ export const siteFaq = [
     a: "Betalingen foregår via Stripe, som er en certificeret betalingsudbyder. Vellivo ser og gemmer aldrig dine kortoplysninger.",
   },
   {
-    q: "Hvornår kan jeg købe produkterne?",
-    a: "Vores produkter åbner for salg, når vi har modtaget og kontrolleret producentens dokumentation, billeder og sikkerhedsinformation. Tilmeld dig nyhedsbrevet, hvis du vil have besked.",
+    q: "Er produkterne på lager?",
+    a: "Ja. Alle produkter kan bestilles direkte i webshoppen. Leveringstiden fremgår af ordrebekræftelsen.",
   },
   {
     q: "Har jeg fortrydelsesret?",

@@ -35,8 +35,8 @@ export default function AboutPage() {
       </ul>
       <h2>Produktsikkerhed</h2>
       <p>
-        Før et produkt åbner for salg, gennemgår vi producentens CE-dokumentation, brugsanvisning og sikkerhedsinformation. Indtil da
-        vises produktet som “Kommer snart”.
+        Læs altid brugsanvisningen og sikkerhedsinformationen, før du tager et produkt i brug. Oplysninger, som producenten endnu ikke
+        har bekræftet, er markeret med “Afventer verificering” på produktsiden.
       </p>
       <p>
         Har du spørgsmål, er du velkommen til at <Link href="/kontakt">kontakte os</Link>.

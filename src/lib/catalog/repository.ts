@@ -5,6 +5,9 @@ import { categories as codeCategories, defaultShipping, products as codeProducts
 import type { Campaign, Category, Product, ShippingSettings } from "@/lib/catalog/types";
 import { getSoldCounts } from "@/lib/data/inventory";
 
+/** Tilgængeligt antal for produkter uden lagerbegrænsning. Vises aldrig for kunden. */
+export const UNLIMITED_STOCK = 9999;
+
 /**
  * Kataloget kommer fra koden (src/data). Det eneste dynamiske er lagerstatus,
  * som beregnes som modtaget antal minus solgte enheder registreret i Vercel Blob.
@@ -20,7 +23,10 @@ export async function loadProductsWithStock(): Promise<Product[]> {
   } catch (err) {
     console.error("[lager] kunne ikke læse solgte enheder – viser modtaget antal", err);
   }
-  return visible.map((p) => ({ ...p, stock: Math.max(0, p.stock - (sold.get(p.id) ?? 0)) }));
+  return visible.map((p) => ({
+    ...p,
+    stock: p.alwaysInStock ? UNLIMITED_STOCK : Math.max(0, p.stock - (sold.get(p.id) ?? 0)),
+  }));
 }
 
 export const getProducts = cache(loadProductsWithStock);

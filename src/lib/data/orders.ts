@@ -191,7 +191,8 @@ export async function markOrderPaid(orderId: string, p: PaymentConfirmation): Pr
 
   const shortages: string[] = [];
   for (const item of order.items) {
-    const received = catalog.find((c) => c.id === item.productId)?.stock ?? 0;
+    const product = catalog.find((c) => c.id === item.productId);
+    const received = product?.alwaysInStock ? Number.POSITIVE_INFINITY : (product?.stock ?? 0);
     const res = await applySale(item.productId, orderId, item.quantity, received);
     if (res === "insufficient") shortages.push(item.productName);
   }

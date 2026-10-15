@@ -8,7 +8,7 @@ Ingen database og intet adminområde – produktdata redigeres i koden via GitHu
 
 > **Sortiment:** Vellivo Lumbar (lændemassager, model ST-1202C), Vellivo Eye Premium, Vellivo Eye Air og Vellivo Eye Smart (øjenmassagere). Produktdata og billeder er hentet fra leverandørens produktsider og skrevet om til dansk for slutkunder – uden engrosoplysninger og uden leverandørens helbredspåstande.
 >
-> **Status:** Produkterne vises som **"Kommer snart"** og kan ikke købes endnu. Sæt `status: "published"` og `stock` i `src/data/catalog.ts`, når CE-dokumentation, brugsanvisning, pris og lager er på plads. Se [docs/missing-information.md](docs/missing-information.md).
+> **Status:** Alle fire produkter er udgivet og vises som **"På lager"** uden antal (`alwaysInStock` i `src/data/catalog.ts`). Køb kræver, at `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` og en privat Vercel Blob-store (`BLOB_READ_WRITE_TOKEN`) er sat i Vercel – ellers svarer kassen med en venlig fejlbesked. Dokumentation, der stadig mangler (CE, dansk brugsanvisning m.m.), står i [docs/missing-information.md](docs/missing-information.md).
 
 ## Arkitektur
 

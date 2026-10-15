@@ -28,13 +28,13 @@ describe("produktkatalog", () => {
     }
   });
 
-  it("udgivne produkter har verificerede data, billeder og lager", () => {
+  it("udgivne produkter har billeder, leverandørmodel og lagerstatus", () => {
+    // Ejeren har besluttet at udgive, selvom dele af `missingData` (CE-dokumenter,
+    // brugsanvisning) endnu ikke er indhentet. Disse minimumskrav gælder stadig.
     for (const p of products.filter((x) => x.status === "published")) {
-      expect(p.missingData, `${p.name}: missingData skal være tom`).toEqual([]);
-      expect(p.specs.every((s) => s.value !== null), `${p.name}: alle specifikationer skal udfyldes`).toBe(true);
       expect(p.images.length, `${p.name}: mindst ét billede`).toBeGreaterThan(0);
-      expect(p.inBox, `${p.name}: indhold i æsken`).not.toBeNull();
       expect(p.supplierModel, `${p.name}: leverandørens model`).not.toBeNull();
+      expect(p.alwaysInStock || p.stock > 0, `${p.name}: skal have lager eller alwaysInStock`).toBe(true);
       for (const img of p.images) {
         expect(
           img.url.startsWith("/produkter/") || img.url.startsWith("https://assets.laicms.com/"),

@@ -235,7 +235,7 @@ export default async function ProductPage({ params }: PageProps<"/produkter/[slu
                 Fragt: {formatDkk(shipping.flatRateOre)}
                 {shipping.freeThresholdOre !== null && ` (gratis over ${formatDkk(shipping.freeThresholdOre)})`}.
               </li>
-              <li>Leveringstid: {site.terms.deliveryTime ?? "oplyses ved lancering"}.</li>
+              <li>Leveringstid: {site.terms.deliveryTime ?? "oplyses i ordrebekræftelsen"}.</li>
               <li>{site.terms.withdrawalDays} dages fortrydelsesret og {site.terms.complaintYears} års reklamationsret.</li>
             </ul>
             <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">

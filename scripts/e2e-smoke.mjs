@@ -55,7 +55,7 @@ for (const vp of [
   page.on("pageerror", (e) => consoleErrors.push(e.message));
   const titles = new Set();
   for (const path of pages) {
-    const res = await page.goto(BASE + path, { waitUntil: "networkidle" });
+    const res = await page.goto(BASE + path, { waitUntil: "load" });
     const status = res?.status();
     const h1 = await page.locator("h1").count();
     const title = await page.title();
@@ -73,15 +73,16 @@ for (const vp of [
     }
   }
 
-  // Kladder: noindex og ingen Product-schema
-  await page.goto(BASE + "/produkter/laendemassager");
-  const robots = await page.locator('meta[name="robots"]').getAttribute("content");
-  check(/noindex/.test(robots ?? ""), "kladde-produkt har noindex");
+  // Udgivne produkter: indekserbare, Product-schema og købsknap
+  await page.goto(BASE + "/produkter/laendemassager", { waitUntil: "load" });
+  const robots = await page.locator('meta[name="robots"]').getAttribute("content").catch(() => null);
+  check(!/noindex/.test(robots ?? ""), "udgivet produkt er indekserbart");
   const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
-  check(!ld.some((t) => t.includes('"Product"')), "kladde-produkt har ingen Product-schema");
+  check(ld.some((t) => t.includes('"Product"') && t.includes("InStock")), "Product-schema med InStock");
   check(ld.some((t) => t.includes('"BreadcrumbList"')), "BreadcrumbList-schema findes");
   check(!ld.some((t) => t.includes("AggregateRating")), "ingen AggregateRating");
-  check((await page.getByText("Få besked, når").count()) > 0, "kladde viser 'Få besked' i stedet for inaktiv købsknap");
+  check((await page.getByText("På lager").count()) > 0, "produktet vises som 'På lager'");
+  check((await page.getByRole("button", { name: "Læg i kurv" }).count()) === 1, "'Læg i kurv'-knap findes");
 
   // Mobilnavigation
   if (vp.name === "mobil") {
@@ -94,14 +95,14 @@ for (const vp of [
     check(!(await page.locator("#mobilmenu").isVisible().catch(() => false)), "mobilmenu lukker efter navigation");
   }
 
-  // Kurv med en kladde: forklarende besked, ingen betalingsknap
-  await page.goto(BASE + "/", { waitUntil: "networkidle" });
-  await page.evaluate(() => localStorage.setItem("vellivo-cart-v1", JSON.stringify([{ slug: "laendemassager", quantity: 2 }])));
-  await page.goto(BASE + "/kurv", { waitUntil: "networkidle" });
+  // Kurv: læg i kurv fra produktsiden, se kassen, fjern vare
+  await page.goto(BASE + "/produkter/laendemassager", { waitUntil: "load" });
+  await page.getByRole("button", { name: "Læg i kurv" }).click();
+  await page.getByText("er lagt i kurven").waitFor({ timeout: 10000 }).catch(() => {});
+  await page.goto(BASE + "/kurv", { waitUntil: "load" });
   await page.getByRole("button", { name: "Fjern" }).waitFor({ timeout: 10000 }).catch(() => {});
-  check((await page.getByText("kan ikke købes endnu").count()) > 0, "kurven afviser kladder med forklaring");
-  check((await page.getByRole("link", { name: "Gå til kassen" }).count()) === 0, "ingen 'Gå til kassen' for ugyldig kurv");
-  check(await page.getByText("1.798").count().then((n) => n > 0), "subtotal beregnes (2 × 899 kr.)");
+  check((await page.getByText("899").count()) > 0, "kurven viser prisen (899 kr.)");
+  check((await page.getByRole("link", { name: "Gå til kassen" }).count()) === 1, "'Gå til kassen' vises");
   await page.getByRole("button", { name: "Fjern" }).click();
   await page.getByText("Din kurv er tom").waitFor({ timeout: 10000 }).catch(() => {});
   check((await page.getByText("Din kurv er tom").count()) > 0, "vare kan fjernes fra kurven");
@@ -112,11 +113,11 @@ for (const vp of [
 
 // API'er
 const api = await fetch(BASE + "/api/checkout", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ items: [{ slug: "laendemassager", quantity: 1 }], acceptTerms: true }) });
-check([400, 409, 503].includes(api.status), `/api/checkout afviser køb af kladde / ukonfigureret betaling (${api.status})`);
+check([503].includes(api.status), `/api/checkout svarer 503 uden Stripe-nøgler (${api.status})`);
 const wh = await fetch(BASE + "/api/webhooks/stripe", { method: "POST", body: "{}" });
 check([400, 503].includes(wh.status), `/api/webhooks/stripe afviser usigneret kald (${wh.status})`);
 const sm = await (await fetch(BASE + "/sitemap.xml")).text();
-check(!sm.includes("/produkter/"), "sitemap udelader kladde-produkter");
+check(sm.includes("/produkter/laendemassager"), "sitemap indeholder udgivne produkter");
 check(sm.includes("/kategori/ryg-og-laend"), "sitemap indeholder kategorier");
 const nf = await fetch(BASE + "/produkter/findes-ikke");
 check(nf.status === 404, "ukendt produkt giver 404");

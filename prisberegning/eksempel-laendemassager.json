@@ -1,0 +1,22 @@
+{
+  "_kommentar": "EKSEMPEL med pladsholdere. null = mangler. Udfyld med faktiske tal fra leverandør, speditør, fragtfirma og Stripe. Beløb i DKK pr. enhed; ekskl. moms hvis virksomheden er momsregistreret.",
+  "produkt": "Vellivo Lumbar",
+  "purchasePrice": null,
+  "supplierCurrency": "USD",
+  "exchangeRate": null,
+  "freightFromSupplier": null,
+  "insurance": null,
+  "dutyPercent": null,
+  "otherImportCosts": null,
+  "packaging": null,
+  "warehouseHandling": null,
+  "shippingToCustomer": null,
+  "shippingChargedInclVat": 0,
+  "paymentFeePercent": null,
+  "paymentFeeFixed": null,
+  "adCostPerOrder": null,
+  "returnsPercent": null,
+  "salesPriceInclVat": 899,
+  "vatRegistered": true,
+  "competitorPrice": 999
+}

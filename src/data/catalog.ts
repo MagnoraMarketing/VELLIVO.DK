@@ -17,7 +17,10 @@ import type { Category, Product, ProductImage, ShippingSettings } from "@/lib/ca
  * `null` og vises som "Afventer verificering".
  *
  * Billederne er leverandørens og hentes fra deres billed-CDN
- * (assets.laicms.com) via Vercels billedoptimering.
+ * (assets.laicms.com) via Vercels billedoptimering. Billeder med
+ * helbredspåstande (fx "relieve pain", "improve sleep quality", "medical
+ * grade"), kinesisk tekst eller OEM-/lagerindhold er fjernet efter
+ * tekstgenkendelse (OCR). De resterende billeder kan have engelsk tekst.
  *
  * Ændringer laves via GitHub (eller Claude Code) og udgives automatisk af
  * Vercel. Se docs/drift-og-redigering.md.
@@ -172,11 +175,7 @@ export const products: Product[] = [
       ["xq9ful.webp", 1992, 1992],
       ["o5kdme.webp", 1944, 1976],
       ["anuh5w.webp", 1992, 1992],
-      ["ilkd00.webp", 787, 893],
-      ["kvl2jm.webp", 787, 1158],
-      ["li2i1a.webp", 787, 841],
       ["wn02vh.webp", 784, 673],
-      ["zbwca1.webp", 787, 649],
       ["g1ddsp.webp", 784, 1004],
       ["dtlff2.webp", 787, 699],
       ["ijgzyx.webp", 787, 1351],
@@ -255,16 +254,10 @@ export const products: Product[] = [
     images: gallery("Vellivo Eye Premium øjenmassager", [
       ["uw6fxs.webp", 2040, 2040],
       ["b6pmt2.webp", 2040, 2040],
-      ["e71ffq.webp", 2040, 2040],
       ["fsojws.webp", 2032, 2032],
       ["r7rg0v.webp", 2040, 2040],
-      ["7l2766.webp", 2040, 2040],
-      ["azi7pu.webp", 2040, 2040],
       ["4j58jr.webp", 797, 797],
-      ["pcqomx.webp", 797, 797],
-      ["93c0ki.webp", 794, 794],
       ["6g1y9f.webp", 1494, 996],
-      ["o6j8md.webp", 765, 991],
     ]),
     supplierUrl:
       "https://zonyoutech.com/products/premium-heated-eye-massager-with-bluetooth-music-air-compression-oem-eye-massagers-manufacturer",
@@ -335,13 +328,10 @@ export const products: Product[] = [
     images: gallery("Vellivo Eye Air øjenmassager", [
       ["kcd47r.webp", 2040, 2040],
       ["0k4h0m.webp", 2040, 2040],
-      ["wf7rgh.webp", 2040, 2040],
       ["7h26pj.webp", 2040, 2040],
       ["iqg78f.webp", 2000, 2000],
       ["dyg3u4.webp", 2000, 2000],
-      ["mhe1dn.webp", 2040, 2040],
       ["gg3w0k.webp", 2040, 2040],
-      ["f54i7c.webp", 1020, 1020],
       ["h5wixp.webp", 797, 797],
     ]),
     supplierUrl: "https://zonyoutech.com/products/heated-air-compression-eye-massager-with-vibration-bluetooth-built-in-music",
@@ -381,6 +371,8 @@ export const products: Product[] = [
       { label: "Programmer", value: "3 massageprogrammer" },
       { label: "Auto-sluk", value: "Efter 15 minutter" },
       { label: "Materialer", value: "ABS-skal, øjenpude i kunstlæder" },
+      { label: "Batteri", value: "800 mAh" },
+      { label: "Indgang", value: "DC 5 V / 1 A" },
       { label: "Opladning", value: "USB-C, cirka 2,5 time" },
       { label: "Driftstid", value: "70–80 minutter pr. opladning" },
       { label: "Design", value: "Foldbar 180°" },
@@ -416,11 +408,9 @@ export const products: Product[] = [
       ["fgd32w.webp", 2040, 2040],
       ["083dpl.webp", 2040, 2040],
       ["0hhjk4.webp", 2040, 2040],
-      ["96915209-eeb3-43d3-94ba-8b1af9c68d5d.webp", 1785, 2391],
       ["e4e5d966-62f5-4be0-b5dd-009a9d977fee.webp", 1785, 2391],
       ["18fce02e-dbda-417f-9d7d-da4f5e977c2f.webp", 1785, 2391],
       ["b259caaa-ad7b-44b8-ba86-408007d9bfc3.webp", 1757, 2353],
-      ["e9d48e67-2120-43e3-8f45-1c893a7cb791.webp", 1785, 2391],
       ["aada0e3c-60f2-4f42-bdc6-3e79a76aea7d.webp", 1785, 2391],
     ]),
     supplierUrl:

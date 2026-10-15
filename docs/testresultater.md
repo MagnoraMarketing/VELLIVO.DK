@@ -8,11 +8,11 @@
 | TypeScript | `npm run typecheck` | ✅ ingen fejl |
 | Enhedstests | `npm test` | ✅ 44/44 bestået |
 | Produktionsbuild | `npm run build` | ✅ uden fejl og advarsler |
-| Browser-røgtest (mobil 375 px + desktop 1366 px) | `npm run test:e2e` | ✅ 101/101 tjek bestået |
+| Browser-røgtest (mobil 375 px + desktop 1366 px) | `npm run test:e2e` | ✅ 92/92 tjek bestået (4 produkter, 2 kategorier) |
 
 ## Hvad er testet
 
-- **Produktvisning og priser:** alle 5 produktsider, 4 kategorier, shop og forside returnerer 200 med én H1; ukendt produkt giver 404.
+- **Produktvisning og priser:** alle 4 produktsider, 2 kategorier, shop og forside returnerer 200 med én H1; ukendt produkt giver 404.
 - **Momsberegning:** 25 % moms udregnes som 20 % af bruttobeløbet (899 kr. → 179,80 kr.).
 - **Kurv:** tilføj (via localStorage), beregn subtotal, fjern vare; kladder afvises med forklaring og uden betalingsknap.
 - **Fragt:** fast fragt under grænsen, gratis over grænsen.
@@ -39,12 +39,6 @@
 ## Enhedstests (detaljer)
 
 ```
-✓ tests/unit/env.test.ts > miljøvariabler > kaster en tydelig fejl, når Stripe mangler
-✓ tests/unit/env.test.ts > miljøvariabler > afviser forkert formaterede nøgler og registrerer test/live
-✓ tests/unit/env.test.ts > miljøvariabler > kræver Vercel Blob i produktion – lokal lagring kun under udvikling
-✓ tests/unit/store.test.ts > datalager > afviser skrivning med forældet ETag og dubletter
-✓ tests/unit/store.test.ts > datalager > afviser usikre stier
-✓ tests/unit/store.test.ts > datalager > registrerer samtidige salg korrekt og kun én gang pr. ordre
 ✓ tests/unit/pricing.test.ts > fragt > opkræver fragt under grænsen og giver gratis fragt over
 ✓ tests/unit/pricing.test.ts > kampagner > anvender aktiv kampagne og runder til hele kroner
 ✓ tests/unit/pricing.test.ts > kampagner > ignorerer inaktive, fremtidige og udløbne kampagner
@@ -67,22 +61,28 @@
 ✓ tests/unit/webhook.test.ts > processStripeEvent > markerer udløbne/annullerede sessioner
 ✓ tests/unit/webhook.test.ts > processStripeEvent > sender ordren til manuel kontrol ved beløbsafvigelse og trækker ikke lager
 ✓ tests/unit/webhook.test.ts > processStripeEvent > håndterer ukendte ordrer og irrelevante hændelser
-✓ tests/unit/pricing-calculator.test.ts > prisberegner > markerer manglende input og er ufuldstændig
-✓ tests/unit/pricing-calculator.test.ts > prisberegner > beregner dækningsbidrag for momsregistreret virksomhed
-✓ tests/unit/pricing-calculator.test.ts > prisberegner > break-even-prisen giver nul i bidrag efter annoncering
-✓ tests/unit/pricing-calculator.test.ts > prisberegner > medregner importmoms som omkostning, når virksomheden ikke er momsregistreret
-✓ tests/unit/pricing-calculator.test.ts > prisberegner > break-even inkluderer fragt opkrævet hos kunden
+✓ tests/unit/store.test.ts > datalager > afviser skrivning med forældet ETag og dubletter
+✓ tests/unit/store.test.ts > datalager > afviser usikre stier
+✓ tests/unit/store.test.ts > datalager > registrerer samtidige salg korrekt og kun én gang pr. ordre
+✓ tests/unit/checkout.test.ts > checkout-validering > kræver accept af handelsbetingelser
+✓ tests/unit/checkout.test.ts > checkout-validering > ignorerer/afviser klientpriser og ugyldige værdier
+✓ tests/unit/checkout.test.ts > checkout-validering > bygger en Stripe-session i DKK med serverberegnede beløb
 ✓ tests/unit/catalog.test.ts > produktkatalog > har unikke id'er, slugs og SKU'er
 ✓ tests/unit/catalog.test.ts > produktkatalog > refererer kun til eksisterende kategorier
 ✓ tests/unit/catalog.test.ts > produktkatalog > har gyldige priser og SEO-felter
 ✓ tests/unit/catalog.test.ts > produktkatalog > udgivne produkter har verificerede data, billeder og lager
 ✓ tests/unit/catalog.test.ts > produktkatalog > indeholder ingen helbredspåstande
 ✓ tests/unit/catalog.test.ts > produktkatalog > kampagner har gyldige rabatter og perioder
+✓ tests/unit/env.test.ts > miljøvariabler > kaster en tydelig fejl, når Stripe mangler
+✓ tests/unit/env.test.ts > miljøvariabler > afviser forkert formaterede nøgler og registrerer test/live
+✓ tests/unit/env.test.ts > miljøvariabler > kræver Vercel Blob i produktion – lokal lagring kun under udvikling
+✓ tests/unit/pricing-calculator.test.ts > prisberegner > markerer manglende input og er ufuldstændig
+✓ tests/unit/pricing-calculator.test.ts > prisberegner > beregner dækningsbidrag for momsregistreret virksomhed
+✓ tests/unit/pricing-calculator.test.ts > prisberegner > break-even-prisen giver nul i bidrag efter annoncering
+✓ tests/unit/pricing-calculator.test.ts > prisberegner > medregner importmoms som omkostning, når virksomheden ikke er momsregistreret
+✓ tests/unit/pricing-calculator.test.ts > prisberegner > break-even inkluderer fragt opkrævet hos kunden
 ✓ tests/unit/money.test.ts > moms og formattering > beregner momsandelen af en pris inkl. 25 % moms
 ✓ tests/unit/money.test.ts > moms og formattering > formaterer beløb i DKK
-✓ tests/unit/checkout.test.ts > checkout-validering > kræver accept af handelsbetingelser
-✓ tests/unit/checkout.test.ts > checkout-validering > ignorerer/afviser klientpriser og ugyldige værdier
-✓ tests/unit/checkout.test.ts > checkout-validering > bygger en Stripe-session i DKK med serverberegnede beløb
 ```
 
 ## Browser-røgtest (detaljer)
@@ -93,14 +93,11 @@
   ✓ / → 200, h1=1, canonical=ja, overflow=0px
   ✓ /shop → 200, h1=1, canonical=ja, overflow=0px
   ✓ /kategori/ryg-og-laend → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/nakke-og-skuldre → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/oejne-og-haender → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/hoved-og-hovedbund → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /kategori/oejenmassagere → 200, h1=1, canonical=ja, overflow=0px
   ✓ /produkter/laendemassager → 200, h1=1, canonical=ja, overflow=0px
   ✓ /produkter/oejenmassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/nakkemassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/haandmassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/hovedbundsmassager → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /produkter/oejenmassager-air → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /produkter/oejenmassager-smart → 200, h1=1, canonical=ja, overflow=0px
   ✓ /guides → 200, h1=1, canonical=ja, overflow=0px
   ✓ /guides/saadan-vaelger-du-en-laendemassager → 200, h1=1, canonical=ja, overflow=0px
   ✓ /om-vellivo → 200, h1=1, canonical=ja, overflow=0px
@@ -134,23 +131,17 @@
   ✓ /shop → 200, h1=1, canonical=ja, overflow=0px
   ✓ /shop har unik titel: "Shop – alle massageapparater | Vellivo"
   ✓ /kategori/ryg-og-laend → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/ryg-og-laend har unik titel: "Lændemassager og rygmassager til hjemmet | Vellivo"
-  ✓ /kategori/nakke-og-skuldre → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/nakke-og-skuldre har unik titel: "Nakkemassager og nakke- og skuldermassager | Vellivo"
-  ✓ /kategori/oejne-og-haender → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/oejne-og-haender har unik titel: "Øjenmassager og håndmassager | Vellivo"
-  ✓ /kategori/hoved-og-hovedbund → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /kategori/hoved-og-hovedbund har unik titel: "Hovedbundsmassager – elektrisk massage til hovedbunden | Vellivo"
+  ✓ /kategori/ryg-og-laend har unik titel: "Lændemassager med varme og stræk | Vellivo"
+  ✓ /kategori/oejenmassagere → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /kategori/oejenmassagere har unik titel: "Øjenmassager med varme og Bluetooth | Vellivo"
   ✓ /produkter/laendemassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/laendemassager har unik titel: "Lændemassager – Vellivo Lumbar til hjemmet | Vellivo"
+  ✓ /produkter/laendemassager har unik titel: "Lændemassager med stræk, varme og EMS – Vellivo Lumbar | Vellivo"
   ✓ /produkter/oejenmassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/oejenmassager har unik titel: "Øjenmassager – Vellivo Eye | Vellivo"
-  ✓ /produkter/nakkemassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/nakkemassager har unik titel: "Nakkemassager – Vellivo Neck til nakke og skuldre | Vellivo"
-  ✓ /produkter/haandmassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/haandmassager har unik titel: "Håndmassager – Vellivo Hand | Vellivo"
-  ✓ /produkter/hovedbundsmassager → 200, h1=1, canonical=ja, overflow=0px
-  ✓ /produkter/hovedbundsmassager har unik titel: "Hovedbundsmassager – Vellivo Scalp | Vellivo"
+  ✓ /produkter/oejenmassager har unik titel: "Øjenmassager med varme og Bluetooth – Vellivo Eye Premium | Vellivo"
+  ✓ /produkter/oejenmassager-air → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /produkter/oejenmassager-air har unik titel: "Øjenmassager med LCD og 5 programmer – Vellivo Eye Air | Vellivo"
+  ✓ /produkter/oejenmassager-smart → 200, h1=1, canonical=ja, overflow=0px
+  ✓ /produkter/oejenmassager-smart har unik titel: "Let øjenmassager med grafenvarme – Vellivo Eye Smart | Vellivo"
   ✓ /guides → 200, h1=1, canonical=ja, overflow=0px
   ✓ /guides har unik titel: "Købsguides – vælg det rigtige massageapparat | Vellivo"
   ✓ /guides/saadan-vaelger-du-en-laendemassager → 200, h1=1, canonical=ja, overflow=0px

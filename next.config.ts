@@ -1,15 +1,5 @@
 import type { NextConfig } from "next";
 
-const supabaseHost = (() => {
-  try {
-    return process.env.NEXT_PUBLIC_SUPABASE_URL
-      ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
-      : undefined;
-  } catch {
-    return undefined;
-  }
-})();
-
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   turbopack: {
@@ -22,9 +12,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: supabaseHost
-      ? [{ protocol: "https", hostname: supabaseHost, pathname: "/storage/v1/object/public/**" }]
-      : [],
+    // Leverandørens produktbilleder (ZonyouTech) hentes fra deres billed-CDN.
+    remotePatterns: [{ protocol: "https", hostname: "assets.laicms.com", pathname: "/7243e482us/**" }],
   },
   async redirects() {
     return [
@@ -34,6 +23,13 @@ const nextConfig: NextConfig = {
       { source: "/produkter", destination: "/shop", permanent: true },
       { source: "/kategori", destination: "/shop", permanent: true },
       { source: "/cart", destination: "/kurv", permanent: true },
+      // Produkter og kategorier, der er udgået af sortimentet.
+      { source: "/produkter/nakkemassager", destination: "/shop", permanent: true },
+      { source: "/produkter/haandmassager", destination: "/shop", permanent: true },
+      { source: "/produkter/hovedbundsmassager", destination: "/shop", permanent: true },
+      { source: "/kategori/nakke-og-skuldre", destination: "/shop", permanent: true },
+      { source: "/kategori/oejne-og-haender", destination: "/kategori/oejenmassagere", permanent: true },
+      { source: "/kategori/hoved-og-hovedbund", destination: "/shop", permanent: true },
       { source: "/about", destination: "/om-vellivo", permanent: true },
       { source: "/contact", destination: "/kontakt", permanent: true },
     ];

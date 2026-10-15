@@ -20,19 +20,20 @@ Webshoppen er teknisk klar, men følgende skal leveres/besluttes af virksomheden
 - [ ] Varemærkesøgning for "Vellivo" i Patent- og Varemærkestyrelsen (DKPTO) og EUIPO er **ikke** udført. Websøgning viste andre brugere af navnet: vellivo.store (børneprodukt) og vellivo.com ("Vellivo X"). Navnet "Velliv" (pensionsselskab) ligger tæt op ad. Anbefaling: få en varemærkeretlig vurdering før lancering.
 
 ## Leverandør og produkter (`src/data/catalog.ts`)
-Leverandørens website (zonyoutech.com) kunne ikke tilgås fra udviklingsmiljøet. For **hvert** produkt mangler:
-- [ ] Konkret model og modelnummer (for Eye, Neck og Scalp skal modellen også vælges i kataloget)
-- [ ] Datablad: varme, vibration, luftkompression, EMS, intensitet, betjening, strømforsyning, batteri/ladetid, mål, vægt, materialer, IP-klasse (Scalp)
-- [ ] Indhold i emballagen
-- [ ] Dansk brugsanvisning og sikkerhedsinformation
-- [ ] EU-overensstemmelseserklæring (CE) og testrapporter: EMC-direktivet, lavspændingsdirektivet (hvis relevant), RoHS, radioudstyrsdirektivet (RED) hvis Bluetooth/trådløst, batteriforordningen ved batterier, WEEE-registrering (producentansvar i DK via DPA-System), GPSR-krav
-- [ ] Afklaring af, om produktet markedsføres som medicinsk udstyr (det må det ikke med de nuværende tekster)
-- [ ] Produktbilleder/video med skriftlig ret til kommerciel brug
-- [ ] Indkøbspris, MOQ, fragt, forsikring, told (HS-kode), øvrige importomkostninger
-- [ ] Modtaget lagerantal
+Produktdata og billeder er hentet fra leverandørens fire produktsider (15.10.2026) via en Vercel Sandbox, da leverandørens site er blokeret i udviklingsmiljøet. Følgende mangler stadig:
+- [ ] **Alle produkter:** indhold i emballagen, dansk brugsanvisning og sikkerhedsinformation, modelspecifik CE-overensstemmelseserklæring og testrapporter (EMC, lavspænding, RoHS, radioudstyrsdirektivet pga. Bluetooth, batteriforordningen), WEEE-registrering, importørens navn/adresse på produkt/emballage (GPSR)
+- [ ] **Billeder:** skriftlig bekræftelse fra ZonyouTech på, at I må bruge deres billeder kommercielt. Billederne hentes i dag direkte fra leverandørens CDN (assets.laicms.com) – kopiér dem gerne til `public/produkter/` for at være uafhængig af leverandørens site. Kontrollér også, at billederne ikke indeholder engros-/OEM-tekst eller helbredspåstande.
+- [ ] **Vellivo Eye Premium, Air og Smart:** leverandørens modelnumre
+- [ ] **Vellivo Eye Air:** batteri, driftstid, opladning, mål og vægt (ikke oplyst af leverandøren)
+- [ ] **Vellivo Eye Smart:** valg af farve (sølv eller pink)
+- [ ] EMS-funktionen i Vellivo Lumbar: kontrollér advarsler i producentens manual (pacemaker, graviditet, epilepsi m.m.)
+- [ ] Indkøbspris, fragt, forsikring, told (HS-kode) og øvrige importomkostninger til prisberegneren
+- [ ] Modtaget lagerantal (`stock`)
+
+**Udeladt bevidst:** Leverandørens påstande som "lindrer rygsmerter", "retter rygsøjlen", "heler muskelvæv", "fremmer blodcirkulationen" og "mindsker mørke rande og hævelser" er ikke oversat, da sådanne helbredspåstande ikke må bruges om velværeprodukter. Engrosoplysninger (MOQ, private label, leveringstid fra fabrik) er også udeladt.
 
 ## Priser
-- [ ] Godkendelse af endelige priser. Anbefalinger i [danish-market-pricing.md](danish-market-pricing.md): Lumbar 899, Eye 549, Neck 299–349, Hand 799, Scalp 269 kr.
+- [ ] Godkendelse af endelige priser. Foreløbige priser: Lumbar 899, Eye Premium 699, Eye Air 599, Eye Smart 549 kr. Markedsanalysen i [danish-market-pricing.md](danish-market-pricing.md) viser, at sammenlignelige øjenmassagere med varme og lufttryk ofte koster 526–799 kr.
 - [ ] Manuel kontrol af konkurrentpriser og fragt (kun indhentet via søgeresultater)
 - [ ] Prisberegning med faktiske omkostninger (`npm run prisberegner`)
 - [ ] Endelig fragtpris og grænse for gratis fragt (nu foreløbigt 49 kr. / gratis over 500 kr.)

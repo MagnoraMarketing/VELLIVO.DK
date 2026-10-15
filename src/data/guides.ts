@@ -78,7 +78,7 @@ export const guides: Guide[] = [
       "Guide til øjenmassagere: pasform, varmeindstillinger, opladning, hygiejne og sikkerhed. Find den model, der passer til dig.",
     intro:
       "Øjenmassagere bruges typisk som en kort pause fra skærmen eller som en del af aftenrutinen. Her er de vigtigste ting at overveje.",
-    relatedProducts: ["oejenmassager"],
+    relatedProducts: ["oejenmassager", "oejenmassager-air", "oejenmassager-smart"],
     updatedAt: "2026-10-15",
     sections: [
       {
@@ -109,39 +109,36 @@ export const guides: Guide[] = [
   },
   {
     slug: "massageapparater-til-hjemmet",
-    title: "Massageapparater til hjemmet – en enkel oversigt",
-    seoTitle: "Massageapparater til hjemmet – oversigt og guide",
+    title: "Massageapparater til hjemmet – lænd eller øjne?",
+    seoTitle: "Massageapparater til hjemmet – guide",
     description:
-      "Lændemassager, nakkemassager, øjenmassager, håndmassager eller hovedbundsmassager? Få overblik over typerne og hvad de bruges til.",
+      "Lændemassager eller øjenmassager? Få overblik over forskellene, og find ud af, hvilken af Vellivos øjenmassagere der passer til dig.",
     intro:
-      "Der findes mange slags massageapparater. Denne oversigt hjælper dig med at finde den type, der passer til dine vaner.",
-    relatedProducts: ["laendemassager", "nakkemassager", "oejenmassager", "haandmassager", "hovedbundsmassager"],
+      "Vellivo har en lændemassager og tre øjenmassagere. Her er en enkel oversigt, der hjælper dig med at vælge.",
+    relatedProducts: ["laendemassager", "oejenmassager", "oejenmassager-air", "oejenmassager-smart"],
     updatedAt: "2026-10-15",
     sections: [
       {
         heading: "Lændemassager",
-        paragraphs: ["Til dig, der gerne vil have en rolig stund med fokus på lænden – typisk liggende eller siddende."],
-      },
-      {
-        heading: "Nakke- og skuldermassager",
-        paragraphs: ["Kompakte apparater til nakke og skuldre, fx efter en dag ved skærmen."],
+        paragraphs: [
+          "Til dig, der vil have en rolig stund med fokus på lænden. Vellivo Lumbar lægges under lænden og kombinerer luftpude-stræk, varme, vibration og EMS-pulser. Den er trådløs og betjenes med fjernbetjening.",
+        ],
       },
       {
         heading: "Øjenmassager",
-        paragraphs: ["Bæres som en maske og bruges til korte pauser eller før sengetid."],
-      },
-      {
-        heading: "Håndmassager",
-        paragraphs: ["Du stikker hånden ind i apparatet, mens du sidder. Velegnet til sofaen eller ved bordet."],
-      },
-      {
-        heading: "Hovedbundsmassager",
-        paragraphs: ["Håndholdte apparater til hovedbunden. Tjek vandtætheden, hvis du vil bruge den i badet."],
-      },
-      {
-        heading: "Det gælder for alle typer",
         paragraphs: [
-          "Læs brugsanvisningen, start på laveste indstilling, og stop hvis du oplever ubehag. Massageapparater til hjemmebrug er velværeprodukter – ikke behandling.",
+          "Bæres som en maske og bruges til korte pauser fra skærmen eller før sengetid. Alle tre modeller har varme, Bluetooth og kan foldes sammen.",
+        ],
+        bullets: [
+          "Vellivo Eye Premium: varme op til ca. 42 °C, luftkompression, vibration og 1200 mAh batteri.",
+          "Vellivo Eye Air: LCD-display, 5 programmer, mikrovibration, lufttryk og varme på 40–43 °C.",
+          "Vellivo Eye Smart: den letteste (205 g) med grafenvarme, 3 programmer og indbygget musik.",
+        ],
+      },
+      {
+        heading: "Det gælder for alle apparater",
+        paragraphs: [
+          "Læs brugsanvisningen, start på laveste indstilling, og stop, hvis du oplever ubehag. Massageapparater til hjemmebrug er velværeprodukter – ikke behandling.",
         ],
       },
     ],

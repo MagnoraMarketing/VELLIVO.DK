@@ -9,7 +9,7 @@ import { processStripeEvent } from "@/lib/stripe/webhook";
 
 const stripe = new Stripe("sk_test_dummy");
 const SECRET = "whsec_test_secret";
-const product = products[4]; // Vellivo Scalp – modtaget antal i kataloget (0 som kladde)
+const product = products[3]; // Vellivo Eye Smart – modtaget antal i kataloget (0 som kladde)
 
 let orderId: string;
 let store: MemoryStore;

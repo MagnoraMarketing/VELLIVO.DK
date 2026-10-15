@@ -9,7 +9,10 @@ Fil: `src/data/catalog.ts`
 - **Specifikationer:** udfyld `value` (fx `"3 niveauer, ca. 40–55 °C"`). `null` vises som "Afventer verificering".
 - **Indhold i æsken:** `inBox: ["…", "…"]`.
 
-## Tilføj produktbilleder
+## Produktbilleder
+Produkterne bruger i dag leverandørens billeder direkte fra `https://assets.laicms.com/7243e482us/…` (tilladt i `next.config.ts`). Vil du bruge egne billeder, så følg trinene nedenfor og udskift URL'erne.
+
+### Tilføj egne produktbilleder
 1. Læg billederne i `public/produkter/<slug>/` (WebP eller AVIF, ca. 1600×1600 px, < 300 KB).
 2. Tilføj dem på produktet:
    ```ts

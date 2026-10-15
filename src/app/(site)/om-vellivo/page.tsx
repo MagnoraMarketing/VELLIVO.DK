@@ -14,7 +14,7 @@ export default function AboutPage() {
     <ContentPage title="Om Vellivo" path="/om-vellivo" intro={site.tagline}>
       <p>
         Vellivo er et dansk wellness-brand med et enkelt mål: at gøre massage, komfort og velvære mere tilgængeligt i hverdagen. Vi
-        sælger massageapparater til hjemmet – til ryg, nakke, øjne, hænder og hovedbund.
+        sælger massageapparater til hjemmet – en lændemassager og tre øjenmassagere.
       </p>
       <h2>Sådan arbejder vi</h2>
       <ul>

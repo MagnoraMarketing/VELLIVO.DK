@@ -36,7 +36,10 @@ describe("produktkatalog", () => {
       expect(p.inBox, `${p.name}: indhold i æsken`).not.toBeNull();
       expect(p.supplierModel, `${p.name}: leverandørens model`).not.toBeNull();
       for (const img of p.images) {
-        expect(img.url.startsWith("/produkter/"), `${p.name}: billeder skal ligge i public/produkter/`).toBe(true);
+        expect(
+          img.url.startsWith("/produkter/") || img.url.startsWith("https://assets.laicms.com/"),
+          `${p.name}: billeder skal ligge i public/produkter/ eller på leverandørens CDN (tilladt i next.config.ts)`,
+        ).toBe(true);
         expect(img.alt.length).toBeGreaterThan(5);
       }
     }

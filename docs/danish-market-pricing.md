@@ -3,6 +3,8 @@
 **Undersøgelsesdato:** 15. oktober 2026
 **Udført af:** Claude Code (automatiseret research)
 
+> **Opdatering 15.10.2026:** Sortimentet er ændret til fire produkter: Vellivo Lumbar (ZonyouTech ST-1202C) og tre øjenmassagere (Eye Premium, Eye Air, Eye Smart). Afsnittene om nakke-, hånd- og hovedbundsmassagere nedenfor er derfor kun til reference. Foreløbige priser: Lumbar 899 kr., Eye Premium 699 kr., Eye Air 599 kr., Eye Smart 549 kr. – alle inden for eller over det spænd (526–799 kr.), som sammenlignelige øjenmassagere med varme, lufttryk og Bluetooth sælges til i Danmark.
+
 ## Metode og begrænsninger – læs først
 
 - Udviklingsmiljøets netværkspolitik blokerede direkte adgang til konkurrenternes og leverandørens websites (pricerunner.dk, matas.dk, back-cure.dk, zonyoutech.com m.fl. returnerede DNS-/proxyfejl). **Ingen produktsider er åbnet direkte.**

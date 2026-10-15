@@ -6,7 +6,8 @@ import { describeCartError, effectivePrice, priceCart, shippingFor } from "@/lib
 const shipping: ShippingSettings = { flatRateOre: 4900, freeThresholdOre: 50000, label: "Levering" };
 const published = (p: Product, stock = 5): Product => ({ ...p, status: "published", stock });
 const lumbar = published(catalog[0]);
-const scalp = published(catalog[4]);
+// Fast testpris, så fragtgrænsen kan testes uafhængigt af katalogets priser.
+const scalp = { ...published(catalog[3]), priceOre: 29900 };
 const now = new Date("2026-10-15T12:00:00Z");
 
 const campaign = (over: Partial<Campaign> = {}): Campaign => ({
@@ -63,7 +64,7 @@ describe("kampagner", () => {
 
 describe("priceCart (autoritativ kurvberegning)", () => {
   it("beregner subtotal, fragt, total og moms", () => {
-    const r = priceCart([{ slug: "hovedbundsmassager", quantity: 1 }], [lumbar, scalp], [], shipping, now);
+    const r = priceCart([{ slug: "oejenmassager-smart", quantity: 1 }], [lumbar, scalp], [], shipping, now);
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.totals.subtotalOre).toBe(29900);
@@ -99,7 +100,7 @@ describe("priceCart (autoritativ kurvberegning)", () => {
       [
         { slug: "laendemassager", quantity: 1 },
         { slug: "findes-ikke", quantity: 1 },
-        { slug: "hovedbundsmassager", quantity: 0 },
+        { slug: "oejenmassager-smart", quantity: 0 },
       ],
       [draft, scalp],
       [],

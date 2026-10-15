@@ -9,9 +9,7 @@ const groups = [
     links: [
       { href: "/shop", label: "Alle produkter" },
       { href: "/kategori/ryg-og-laend", label: "Ryg og lænd" },
-      { href: "/kategori/nakke-og-skuldre", label: "Nakke og skuldre" },
-      { href: "/kategori/oejne-og-haender", label: "Øjne og hænder" },
-      { href: "/kategori/hoved-og-hovedbund", label: "Hoved og hovedbund" },
+      { href: "/kategori/oejenmassagere", label: "Øjenmassagere" },
       { href: "/guides", label: "Købsguides" },
     ],
   },

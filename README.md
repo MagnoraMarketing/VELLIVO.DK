@@ -1,12 +1,14 @@
 # Vellivo.dk
 
 Dansk wellness-webshop for **Vellivo – mere velvære i hverdagen.**
-Massageapparater til ryg, nakke, øjne, hænder og hovedbund. Priser i DKK inkl. 25 % moms.
+Lændemassager og øjenmassagere fra leverandøren ZonyouTech. Priser i DKK inkl. 25 % moms.
 
 **Teknik:** Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Stripe Checkout · Vercel (hosting + Vercel Blob) · GitHub.
 Ingen database og intet adminområde – produktdata redigeres i koden via GitHub (eller Claude Code), og Vercel udgiver automatisk.
 
-> **Status:** Alle fem produkter er **kladder** ("Kommer snart"). De kan ikke købes, før model, specifikationer, billeder, CE-dokumentation og endelig pris er godkendt. Se [docs/missing-information.md](docs/missing-information.md).
+> **Sortiment:** Vellivo Lumbar (lændemassager, model ST-1202C), Vellivo Eye Premium, Vellivo Eye Air og Vellivo Eye Smart (øjenmassagere). Produktdata og billeder er hentet fra leverandørens produktsider og skrevet om til dansk for slutkunder – uden engrosoplysninger og uden leverandørens helbredspåstande.
+>
+> **Status:** Produkterne vises som **"Kommer snart"** og kan ikke købes endnu. Sæt `status: "published"` og `stock` i `src/data/catalog.ts`, når CE-dokumentation, brugsanvisning, pris og lager er på plads. Se [docs/missing-information.md](docs/missing-information.md).
 
 ## Arkitektur
 

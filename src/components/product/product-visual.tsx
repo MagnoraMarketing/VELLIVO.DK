@@ -27,7 +27,7 @@ export function ProductVisual({
         height={img.height}
         sizes={sizes}
         priority={priority}
-        className="h-full w-full object-cover"
+        className="h-full w-full bg-paper object-contain"
       />
     );
   }

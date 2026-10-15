@@ -18,15 +18,13 @@ export const revalidate = 300;
 export const metadata = pageMetadata({
   title: "Vellivo – massageapparater og wellness til hjemmet",
   description:
-    "Vellivo er en dansk webshop med massageapparater til ryg, nakke, øjne, hænder og hovedbund. Priser i DKK inkl. moms og ærlig produktinformation.",
+    "Vellivo er en dansk webshop med lændemassager og øjenmassagere med varme. Priser i DKK inkl. moms og ærlig produktinformation.",
   path: "/",
 });
 
 const categoryCopy: Record<string, string> = {
   "ryg-og-laend": "Til en rolig pause for lænden – i sofaen eller sengen.",
-  "nakke-og-skuldre": "Kompakte massagere efter dagen ved skærmen.",
-  "oejne-og-haender": "Små, personlige apparater til hverdagens pauser.",
-  "hoved-og-hovedbund": "Håndholdt velvære til hovedbunden.",
+  oejenmassagere: "Varme, luftkompression og Bluetooth-musik – til skærmpausen.",
 };
 
 export default async function HomePage() {
@@ -54,7 +52,7 @@ export default async function HomePage() {
               Mere velvære <em className="text-forest not-italic">i hverdagen</em>
             </h1>
             <p className="max-w-md text-lg text-muted">
-              Massageapparater til ryg, nakke, øjne, hænder og hovedbund – udvalgt med omtanke, forklaret ærligt og med klare priser i
+              Lændemassager og øjenmassagere med varme, massage og Bluetooth – udvalgt med omtanke, forklaret ærligt og med klare priser i
               DKK inkl. moms.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -112,7 +110,7 @@ export default async function HomePage() {
             </h2>
           </div>
         </div>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-4 sm:grid-cols-2">
           {categories.map((c) => (
             <li key={c.id}>
               <Link href={`/kategori/${c.slug}`} className="group card flex h-full flex-col gap-2 p-6 transition-colors hover:bg-sage/40">
@@ -131,7 +129,7 @@ export default async function HomePage() {
         <h2 id="udvalgte" className="mt-2 mb-8 text-3xl font-medium">
           Udvalgte produkter
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} campaigns={campaigns} />
           ))}
@@ -256,7 +254,7 @@ export default async function HomePage() {
             <h2 id="sortiment" className="text-2xl font-medium">
               Se hele sortimentet
             </h2>
-            <p className="mt-1 text-muted">Fem produkter til ryg, nakke, øjne, hænder og hovedbund.</p>
+            <p className="mt-1 text-muted">En lændemassager og tre øjenmassagere med varme.</p>
           </div>
           <Link href="/shop" className="btn-primary">
             Til shoppen

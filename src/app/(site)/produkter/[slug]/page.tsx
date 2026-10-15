@@ -5,7 +5,7 @@ import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { AddToCart } from "@/components/product/add-to-cart";
 import { Price } from "@/components/product/price";
 import { ProductCard } from "@/components/product/product-card";
-import { ProductVisual } from "@/components/product/product-visual";
+import { ProductGallery } from "@/components/product/product-gallery";
 import { availability, StatusBadge } from "@/components/product/status-badge";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { LockIcon, ReturnIcon, TruckIcon } from "@/components/ui/icons";
@@ -64,19 +64,8 @@ export default async function ProductPage({ params }: PageProps<"/produkter/[slu
 
       <div className="mt-6 grid gap-10 lg:grid-cols-[1.1fr_1fr]">
         {/* Galleri */}
-        <section aria-label="Produktbilleder" className="space-y-3">
-          <div className="card aspect-square overflow-hidden">
-            <ProductVisual product={product} priority sizes="(min-width: 1024px) 55vw, 100vw" />
-          </div>
-          {product.images.length > 1 && (
-            <ul className="grid grid-cols-4 gap-3">
-              {product.images.slice(1, 5).map((img) => (
-                <li key={img.url} className="card aspect-square overflow-hidden">
-                  <ProductVisual product={{ ...product, images: [img] }} sizes="15vw" />
-                </li>
-              ))}
-            </ul>
-          )}
+        <section aria-label="Produktbilleder">
+          <ProductGallery product={product} />
         </section>
 
         {/* Købsboks */}

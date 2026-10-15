@@ -11,7 +11,7 @@ export const site = {
   tagline: "Vellivo – mere velvære i hverdagen.",
   altTagline: "Smarte løsninger til din daglige velvære.",
   description:
-    "Vellivo er en dansk webshop med massageapparater og wellness-produkter til hjemmet. Tydelige priser i DKK inkl. moms og ærlig produktinformation.",
+    "Vellivo er en dansk webshop med lændemassager og øjenmassagere til hjemmet. Tydelige priser i DKK inkl. moms og ærlig produktinformation.",
   locale: "da_DK",
   currency: "DKK",
   company: {
@@ -49,8 +49,7 @@ export const mainNav = [
   { href: "/", label: "Forside" },
   { href: "/shop", label: "Shop" },
   { href: "/kategori/ryg-og-laend", label: "Ryg og lænd" },
-  { href: "/kategori/nakke-og-skuldre", label: "Nakke og skuldre" },
-  { href: "/kategori/oejne-og-haender", label: "Øjne og hænder" },
+  { href: "/kategori/oejenmassagere", label: "Øjenmassagere" },
   { href: "/om-vellivo", label: "Om Vellivo" },
   { href: "/kontakt", label: "Kontakt" },
 ] as const;

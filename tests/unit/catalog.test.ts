@@ -1,0 +1,64 @@
+import { describe, expect, it } from "vitest";
+import { campaigns } from "@/data/campaigns";
+import { categories, products } from "@/data/catalog";
+import { guides } from "@/data/guides";
+
+/**
+ * Kvalitetsporte for kataloget. Kører i `npm test` (og dermed før deploy),
+ * så et produkt ikke ved en fejl kan udgives med manglende oplysninger.
+ */
+describe("produktkatalog", () => {
+  it("har unikke id'er, slugs og SKU'er", () => {
+    for (const key of ["id", "slug", "sku"] as const) {
+      expect(new Set(products.map((p) => p[key])).size).toBe(products.length);
+    }
+  });
+
+  it("refererer kun til eksisterende kategorier", () => {
+    for (const p of products) expect(categories.map((c) => c.slug)).toContain(p.categorySlug);
+  });
+
+  it("har gyldige priser og SEO-felter", () => {
+    for (const p of products) {
+      expect(p.priceOre).toBeGreaterThan(0);
+      expect(p.priceOre % 100).toBe(0);
+      expect(p.seoTitle.length).toBeLessThanOrEqual(60);
+      expect(p.seoDescription.length).toBeLessThanOrEqual(160);
+      expect(p.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+    }
+  });
+
+  it("udgivne produkter har verificerede data, billeder og lager", () => {
+    for (const p of products.filter((x) => x.status === "published")) {
+      expect(p.missingData, `${p.name}: missingData skal være tom`).toEqual([]);
+      expect(p.specs.every((s) => s.value !== null), `${p.name}: alle specifikationer skal udfyldes`).toBe(true);
+      expect(p.images.length, `${p.name}: mindst ét billede`).toBeGreaterThan(0);
+      expect(p.inBox, `${p.name}: indhold i æsken`).not.toBeNull();
+      expect(p.supplierModel, `${p.name}: leverandørens model`).not.toBeNull();
+      for (const img of p.images) {
+        expect(img.url.startsWith("/produkter/"), `${p.name}: billeder skal ligge i public/produkter/`).toBe(true);
+        expect(img.alt.length).toBeGreaterThan(5);
+      }
+    }
+  });
+
+  it("indeholder ingen helbredspåstande", () => {
+    const forbidden = /\b(helbred(er|e)|kurer(er|e)|behandler (smerter|sygdom)|fjerner smerter|garanteret smertelindring|lindrer smerter)\b/i;
+    for (const p of products) {
+      const text = [p.tagline, p.shortDescription, ...p.description, ...p.features.map((f) => f.text), ...p.faq.map((f) => f.a)].join(" ");
+      expect(text, p.name).not.toMatch(forbidden);
+    }
+    for (const g of guides) {
+      const text = g.sections.flatMap((s) => [...s.paragraphs, ...(s.bullets ?? [])]).join(" ");
+      expect(text, g.slug).not.toMatch(forbidden);
+    }
+  });
+
+  it("kampagner har gyldige rabatter og perioder", () => {
+    for (const c of campaigns) {
+      expect(c.discountPercent).toBeGreaterThan(0);
+      expect(c.discountPercent).toBeLessThan(91);
+      if (c.endsAt) expect(new Date(c.endsAt).getTime()).toBeGreaterThan(new Date(c.startsAt).getTime());
+    }
+  });
+});

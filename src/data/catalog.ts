@@ -181,7 +181,6 @@ export const products: Product[] = [
       ["dtlff2.webp", 787, 699],
       ["ijgzyx.webp", 787, 1351],
       ["898b3u.webp", 784, 699],
-      ["5fqt90.webp", 784, 671],
     ]),
     supplierUrl: "https://zonyoutech.com/products/lumbar-traction-massager",
     supplierModel: "ST-1202C",
@@ -423,7 +422,6 @@ export const products: Product[] = [
       ["b259caaa-ad7b-44b8-ba86-408007d9bfc3.webp", 1757, 2353],
       ["e9d48e67-2120-43e3-8f45-1c893a7cb791.webp", 1785, 2391],
       ["aada0e3c-60f2-4f42-bdc6-3e79a76aea7d.webp", 1785, 2391],
-      ["rjpn0p.webp", 2859, 1906],
     ]),
     supplierUrl:
       "https://zonyoutech.com/products/smart-eye-massager-with-heat-and-bluetooth-music-premium-eyecare-wireless-device",

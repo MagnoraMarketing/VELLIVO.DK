@@ -17,7 +17,7 @@ export const site = {
   company: {
     legalName: null as string | null,
     cvr: null as string | null,
-    address: null as string | null,
+    address: "Trindsøvej 5, 8000 Aarhus, Danmark" as string | null,
     returnAddress: null as string | null,
     email: null as string | null,
     phone: null as string | null,

@@ -268,9 +268,9 @@ export default async function HomePage() {
           <div>
             <LeafIcon className="mb-3 text-forest" />
             <h2 id="nyhedsbrev-titel" className="text-3xl font-medium">
-              Få besked ved lancering
+              Nyheder og tilbud
             </h2>
-            <p className="mt-3 text-muted">Tilmeld dig nyhedsbrevet og få besked, når produkterne åbner for salg, samt nye guides og tilbud.</p>
+            <p className="mt-3 text-muted">Tilmeld dig nyhedsbrevet og få besked om nye produkter, guides og tilbud.</p>
           </div>
           <NewsletterForm source="forside" />
         </div>

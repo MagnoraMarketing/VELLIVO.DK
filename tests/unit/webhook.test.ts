@@ -9,7 +9,7 @@ import { processStripeEvent } from "@/lib/stripe/webhook";
 
 const stripe = new Stripe("sk_test_dummy");
 const SECRET = "whsec_test_secret";
-const product = products[3]; // Vellivo Eye Smart – modtaget antal i kataloget (0 som kladde)
+const product = products[3]; // Vellivo Eye Smart – alwaysInStock
 
 let orderId: string;
 let store: MemoryStore;
@@ -81,12 +81,11 @@ describe("processStripeEvent", () => {
     expect(order.paidAt).not.toBeNull();
   });
 
-  it("markerer utilstrækkeligt lager til manuel opfølgning", async () => {
+  it("markerer ikke lagerproblem for produkter uden lagerbegrænsning", async () => {
     await processStripeEvent(sessionEvent("evt_1", "checkout.session.completed"));
     const order = (await getOrder(orderId))!.order;
-    // Kladden har 0 modtaget på lager i kataloget.
-    expect(order.needsAttention).toBe(true);
-    expect(order.attentionReason).toMatch(/lager/i);
+    expect(product.alwaysInStock).toBe(true);
+    expect(order.needsAttention).toBe(false);
   });
 
   it("er idempotent ved gentagne webhooks", async () => {

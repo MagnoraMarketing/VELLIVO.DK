@@ -28,9 +28,9 @@ import type { Category, Product, ProductImage, ShippingSettings } from "@/lib/ca
  * `stock` = modtaget antal i alt. Solgte enheder tælles automatisk i Vercel
  * Blob, så tilgængeligt lager = stock − solgt. Ved genopfyldning øges `stock`.
  *
- * Et produkt må først få `status: "published"` (kan købes), når `missingData`
- * er tom, alle specifikationer er udfyldt, og pris og lager er sat.
- * `npm test` kontrollerer dette automatisk (tests/unit/catalog.test.ts).
+ * Alle fire produkter er udgivet (kan købes) efter ejerens beslutning og vises
+ * som "På lager" uden antal (`alwaysInStock`). `missingData` er en tjekliste
+ * over dokumentation, der stadig skal indhentes hos leverandøren.
  */
 
 const CDN = "https://assets.laicms.com/7243e482us/";
@@ -103,10 +103,11 @@ export const products: Product[] = [
     sku: "VEL-LUMBAR-ST1202C",
     name: "Vellivo Lumbar",
     categorySlug: "ryg-og-laend",
-    status: "draft",
+    status: "published",
     priceOre: 89900,
     lowestPrice30dOre: null,
     stock: 0,
+    alwaysInStock: true,
     tagline: "Trådløs lændemassager med stræk, varme, vibration og EMS",
     shortDescription:
       "Vellivo Lumbar samler luftpude-stræk, varme, vibration, svingmassage og EMS-pulser i ét apparat. Genopladeligt, trådløst og betjenes med fjernbetjening.",
@@ -192,10 +193,11 @@ export const products: Product[] = [
     sku: "VEL-EYE-PREMIUM",
     name: "Vellivo Eye Premium",
     categorySlug: "oejenmassagere",
-    status: "draft",
+    status: "published",
     priceOre: 69900,
     lowestPrice30dOre: null,
     stock: 0,
+    alwaysInStock: true,
     tagline: "Øjenmassager med varme, luftkompression, vibration og Bluetooth",
     shortDescription:
       "Vellivo Eye Premium kombinerer varme op til ca. 42 °C, rytmisk luftkompression, vibration og Bluetooth-musik. Foldbar, trådløs og opladelig via USB-C.",
@@ -271,10 +273,11 @@ export const products: Product[] = [
     sku: "VEL-EYE-AIR",
     name: "Vellivo Eye Air",
     categorySlug: "oejenmassagere",
-    status: "draft",
+    status: "published",
     priceOre: 59900,
     lowestPrice30dOre: null,
     stock: 0,
+    alwaysInStock: true,
     tagline: "Øjenmassager med LCD-display, 5 programmer og Bluetooth",
     shortDescription:
       "Vellivo Eye Air har mikrovibration, blidt lufttryk og varme med konstant temperatur på 40–43 °C. LCD-display, 5 programmer, Bluetooth-lyd og foldbart design.",
@@ -345,10 +348,11 @@ export const products: Product[] = [
     sku: "VEL-EYE-SMART",
     name: "Vellivo Eye Smart",
     categorySlug: "oejenmassagere",
-    status: "draft",
+    status: "published",
     priceOre: 54900,
     lowestPrice30dOre: null,
     stock: 0,
+    alwaysInStock: true,
     tagline: "Let øjenmassager med grafenvarme og Bluetooth-musik",
     shortDescription:
       "Vellivo Eye Smart vejer kun 205 g og har grafenvarme på 38–42 °C, vibration og lufttryk, 3 programmer, indbygget musik og Bluetooth. 15 minutters auto-sluk.",

@@ -39,6 +39,11 @@ export interface Product {
    * Efter indlæsning via repository: tilgængeligt antal (modtaget − solgt).
    */
   stock: number;
+  /**
+   * Vises altid som "På lager" uden lagerbegrænsning (fx ved bestilling hos
+   * leverandøren efter salg). Solgte enheder tælles stadig.
+   */
+  alwaysInStock?: boolean;
   tagline: string;
   shortDescription: string;
   description: string[];
